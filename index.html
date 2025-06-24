@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek Prestasi & Foto Siswa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e1f5fe, #fce4ec);
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      animation: fadeInDown 1s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px;
+      width: 100%;
+      background-color: #42a5f5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #1e88e5;
+    }
+
+    .result {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-left: 8px solid #42a5f5;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+
+    .top10 {
+      border-left-color: #4caf50;
+    }
+
+    .motivasi {
+      border-left-color: #fb8c00;
+    }
+
+    .photo-frame {
+      width: 160px;
+      height: 160px;
+      border: 6px solid #42a5f5;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      animation: zoomIn 0.8s ease;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .not-found {
+      color: #d32f2f;
+      text-align: center;
+      margin-top: 30px;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div style="text-align: center; margin-bottom: 20px; animation: fadeInDown 1s ease;">
+    <img src="images/logo.png" alt="Logo Sekolah" style="width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px;">
+    <h2 style="margin: 0; font-size: 1.2rem; color: #2c3e50;">SMK Negeri Bojonggambir</h2>
+    <h3 style="margin: 0; font-size: 1rem; color: #2c3e50;">Kelas X DKV 3</h3>
+  </div>
+
+  <h1>Cek Prestasi</h1>
+
+  <form id="form">
+    <input type="text" id="nama" placeholder="Masukkan Nama Anda..." required />
+    <button type="submit">Tampilkan</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    const dataSiswa = [
+      { nama: "AGIS ABDI MUIJ", nisn: "0081155409", nilai: 1039, peringkat: 17 },
+      { nama: "AJMI NURAINI", nisn: "0098336983", nilai: 918, peringkat: 31 },
+      { nama: "ALI NUGRAHA", nisn: "0082702515", nilai: 1013, peringkat: 29 },
+      { nama: "ALLIF HAKIM MULYANA", nisn: "0088635642", nilai: 1018, peringkat: 26 },
+      { nama: "ANDIKA PRATAMA YUSUP", nisn: "0083524567", nilai: 1054, peringkat: 15 },
+      { nama: "CANTIKA MAHARANI", nisn: "0089236923", nilai: 1112, peringkat: 1 },
+      { nama: "DEDE SETIAWAN", nisn: "0071137770", nilai: 1029, peringkat: 19 },
+      { nama: "DINAH PADIYAH", nisn: "0097096036", nilai: 1084, peringkat: 5 },
+      { nama: "FAIZ MUKAROM", nisn: "0081099831", nilai: 1063, peringkat: 14 },
+      { nama: "IKBAL ABDUL AZIZ", nisn: "0083295018", nilai: 1028, peringkat: 21 },
+      { nama: "INDRA PURNAMA", nisn: "0089386962", nilai: 1013, peringkat: 29 },
+      { nama: "IQBAL NURUL IKHSAN", nisn: "0085354024", nilai: 1028, peringkat: 21 },
+      { nama: "IRWAN NURHAKIM", nisn: "0085812024", nilai: 1025, peringkat: 23 },
+      { nama: "KHOERIL MUHAMAD IHSAN", nisn: "0074318127", nilai: 1029, peringkat: 19 },
+      { nama: "M AZKA ARDIAN", nisn: "0089383969", nilai: 1020, peringkat: 25 },
+      { nama: "MEINDAH NURISLAMI SALSABILA", nisn: "0096461298", nilai: 1102, peringkat: 3 },
+      { nama: "META NURINSANI", nisn: "0084153319", nilai: 1079, peringkat: 8 },
+      { nama: "MUHAMAD VIGI RAMADANI", nisn: "0086223329", nilai: 1073, peringkat: 10 },
+      { nama: "NESA AGNESIA", nisn: "0086068011", nilai: 1078, peringkat: 9 },
+      { nama: "PAIZAL SIDIQ FATHURROHMAN", nisn: "0085593140", nilai: 1015, peringkat: 27 },
+      { nama: "PAUZAN MUHAMAD RIZKI", nisn: "0094503190", nilai: 1015, peringkat: 27 },
+      { nama: "PEBRIYANA", nisn: "0091379010", nilai: 1032, peringkat: 18 },
+      { nama: "REGINA JULYANA NURUL", nisn: "0086974112", nilai: 1069, peringkat: 13 },
+      { nama: "RESA APRILIA", nisn: "0093071406", nilai: 1088, peringkat: 4 },
+      { nama: "RISMA LESTARI", nisn: "0078485809", nilai: 1110, peringkat: 2 },
+      { nama: "RIZKI ABDULAH", nisn: "3088869603", nilai: 1023, peringkat: 24 },
+      { nama: "RIZWAN AHMAD FAISAL", nisn: "0088167198", nilai: 1042, peringkat: 16 },
+      { nama: "URVI AULIA", nisn: "0084270481", nilai: 1084, peringkat: 5 },
+      { nama: "WIFQI BAHRUL FAHMI", nisn: "3077390412", nilai: 1073, peringkat: 10 },
+      { nama: "WILDA NURUL AFIFAH", nisn: "0088186055", nilai: 1081, peringkat: 7 },
+      { nama: "WULAN LUSTIAWATI", nisn: "0099701391", nilai: 1073, peringkat: 10 }
+    ];
+
+    const form = document.getElementById('form');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('nama').value.toLowerCase();
+      const siswa = dataSiswa.find(s => s.nama.toLowerCase().includes(input));
+
+      if (siswa) {
+        const isTop10 = siswa.peringkat <= 10;
+        const pesan = isTop10
+          ? `Selamat! Kamu meraih peringkat ${siswa.peringkat}. Pertahankan prestasimu!`
+          : `Tetap semangat ${siswa.nama.split(' ')[0]}! Peringkat ${siswa.peringkat} adalah langkah awal. Terus belajar lebih giat!`;
+
+        const namaFile = siswa.nama.toLowerCase().replace(/\s+/g, '');
+        const fotoPath = `images/${namaFile}.jpg`;
+
+        output.innerHTML = `
+          <div class="result ${isTop10 ? 'top10' : 'motivasi'}">
+            <div class="photo-frame">
+              <img src="${fotoPath}" alt="Foto ${siswa.nama}" onerror="this.src='images/default.jpg'">
+            </div>
+            <p><strong>Nama:</strong> ${siswa.nama}</p>
+            <p><strong>NISN:</strong> ${siswa.nisn}</p>
+            <p><strong>Total Nilai:</strong> ${siswa.nilai}</p>
+            <p><strong>Peringkat:</strong> ${siswa.peringkat}</p>
+            <p><strong>Ucapan:</strong> ${pesan}</p>
+          </div>
+        `;
+      } else {
+        output.innerHTML = `<p class="not-found">Nama tidak ditemukan. Coba cek kembali atau gunakan nama lengkap.</p>`;
+      }
+    });
+  </script>
+
+<div style="max-width: 600px; margin: 40px auto; text-align: center; font-size: 1rem; color: #2c3e50; background: #ffffffdd; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: fadeInUp 1s ease;">
+  <p><strong>Pesan untuk Semua Siswa:</strong></p>
+  <p>Teruslah belajar dengan giat, jangan mudah menyerah meskipun hasil belum maksimal. Setiap langkah kecil adalah bagian dari perjalanan besar menuju kesuksesan. Jadilah versi terbaik dari dirimu sendiri!</p>
+  <p style="margin-top: 20px;"><em>Salam hangat dari Wali Kelas,</em><br><strong>Ruli Lesmana, S.T, Gr</strong></p>
+</div>
+
+</body>
+</html>
