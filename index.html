@@ -203,9 +203,9 @@
       const siswa = dataSiswa.find(s => s.nama.toLowerCase().includes(input));
 
       if (siswa) {
-        const isTop3 = siswa.peringkat <= 3;
-        const pesan = isTop3
-          ? `Selamat! Kamu meraih peringkat ${siswa.peringkat} Meraih prestasi yang sangat memuaskan. Memiliki kemampuan akademik yang unggul, aktif, serta bertanggung jawab dalam setiap kegiatan pembelajaran.`
+        const isTop10 = siswa.peringkat <= 5;
+        const pesan = isTop10
+          ? `Selamat! Kamu meraih peringkat ${siswa.peringkat}.Meraih prestasi yang sangat memuaskan. Memiliki kemampuan akademik yang unggul, aktif, serta bertanggung jawab dalam setiap kegiatan pembelajaran. ;
           : `Tetap semangat ${siswa.nama.split(' ')[0]}! Peringkat ${siswa.peringkat} adalah langkah awal. Terus belajar lebih giat!`;
 
         const namaFile = siswa.nama.toLowerCase().replace(/\s+/g, '');
