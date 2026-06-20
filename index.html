@@ -205,8 +205,7 @@
       if (siswa) {
         const isTop10 = siswa.peringkat <= 10;
         const pesan = isTop10
-          ? `Selamat! Kamu meraih peringkat ${siswa.peringkat} .Meraih prestasi yang sangat memuaskan!,
-          : `Tetap semangat ${siswa.nama.split(' ')[0]}! Peringkat ${siswa.peringkat} adalah langkah awal. Terus belajar lebih giat!`;
+          
 
         const namaFile = siswa.nama.toLowerCase().replace(/\s+/g, '');
         const fotoPath = `images/${namaFile}.jpg`;
