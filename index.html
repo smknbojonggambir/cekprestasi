@@ -196,6 +196,8 @@
 
     const form = document.getElementById('form');
     const output = document.getElementById('output');
+    ? `Selamat! Kamu meraih peringkat ${siswa.peringkat} .Meraih prestasi yang sangat memuaskan!,
+          : `Tetap semangat ${siswa.nama.split(' ')[0]}! Peringkat ${siswa.peringkat} adalah langkah awal. Terus belajar lebih giat!`;
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
